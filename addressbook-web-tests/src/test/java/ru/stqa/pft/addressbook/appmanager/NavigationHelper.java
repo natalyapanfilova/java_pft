@@ -12,4 +12,8 @@ public class NavigationHelper extends HelperBase {
     public NavigationHelper(WebDriver wd) {
         super(wd);
     }
+
+    public void gotoHomePage() {
+        click(By.linkText("home"));
+    }
 }
