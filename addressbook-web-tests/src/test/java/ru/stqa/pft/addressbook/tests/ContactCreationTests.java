@@ -21,11 +21,13 @@ public class ContactCreationTests extends TestBase {
         }
         app.getNavigationHelper().gotoHomePage();
         List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().createContact(
-                new ContactData("Ivanov", "Ivan", "Rostov-on-Don, Siversa 1", "ivanov@mail.ru", "89085555505", group),
-                true);
+        ContactData contact = new ContactData("Ivanov", "Ivan", "Rostov-on-Don, Siversa 1", "ivanov@mail.ru", "89085555505", group);
+        app.getContactHelper().createContact(contact, true);
         app.getNavigationHelper().gotoHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() + 1);
+
+        before.add(contact);
+        Assert.assertEquals(after, before);
     }
 }
