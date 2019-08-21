@@ -20,7 +20,7 @@ public class GroupCreationTests extends TestBase {
 
         int max = 0;
         for (GroupData g : after) {
-            if (g.getId() > 0) {
+            if (g.getId() > max) {
                 max = g.getId();
             }
         }

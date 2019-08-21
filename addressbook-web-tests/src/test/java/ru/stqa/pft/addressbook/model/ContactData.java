@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
+    private int id;
     private final String lastName;
     private final String firstName;
     private final String address;
@@ -9,6 +10,7 @@ public class ContactData {
     private final String group;
 
     public ContactData(String lastName, String firstName, String address, String email, String mobilePhone, String group) {
+        this.id = 0;
         this.lastName = lastName;
         this.firstName = firstName;
         this.address = address;
@@ -17,6 +19,23 @@ public class ContactData {
         this.group = group;
     }
 
+    public ContactData(int id, String lastName, String firstName, String address, String email, String mobilePhone, String group) {
+        this.id = id;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.address = address;
+        this.email = email;
+        this.mobilePhone = mobilePhone;
+        this.group = group;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getLastName() {
         return lastName;
@@ -45,7 +64,8 @@ public class ContactData {
     @Override
     public String toString() {
         return "ContactData{" +
-                "lastName='" + lastName + '\'' +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
@@ -60,6 +80,7 @@ public class ContactData {
 
         ContactData that = (ContactData) o;
 
+        if (id != that.id) return false;
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
@@ -69,7 +90,8 @@ public class ContactData {
 
     @Override
     public int hashCode() {
-        int result = lastName != null ? lastName.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
