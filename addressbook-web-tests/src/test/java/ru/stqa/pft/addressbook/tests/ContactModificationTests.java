@@ -15,7 +15,7 @@ public class ContactModificationTests extends TestBase {
         app.getNavigationHelper().gotoHomePage();
         if (! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(
-                    new ContactData("Ivanov", "Ivan", "Rostov-on-Don, Siversa 1", "ivanov@mail.ru", "89085555505", "test1"),
+                    new ContactData().withLastName("Ivanov").withFirstName("Ivan").withAddress("Rostov-on-Don, Siversa 1").withEmail("ivanov@mail.ru").withMobilePhone("89085555505").withGroup("test1"),
                     true);
             app.getNavigationHelper().gotoHomePage();
         }
@@ -25,7 +25,7 @@ public class ContactModificationTests extends TestBase {
     public void testContactModification() {
         List<ContactData> before = app.getContactHelper().getContactList();
         int index = before.size() - 1;
-        ContactData contact = new ContactData(before.get(index).getId(),"Panfilov", before.get(index).getFirstName(), before.get(index).getAddress(), before.get(index).getEmail(), "89081023258", null);
+        ContactData contact = new ContactData().withId(before.get(index).getId()).withLastName("Panfilov").withFirstName(before.get(index).getFirstName()).withAddress(before.get(index).getAddress()).withEmail(before.get(index).getEmail()).withMobilePhone("89081023258");
         app.getContactHelper().modifyContact(index, contact);
         app.getNavigationHelper().gotoHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();

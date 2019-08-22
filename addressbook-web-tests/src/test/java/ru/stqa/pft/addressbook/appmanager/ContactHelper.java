@@ -82,7 +82,7 @@ public class ContactHelper extends HelperBase {
             String address = contactdata.get(3).getText();
             String email = contactdata.get(4).getText();
             String mobilePhone = contactdata.get(5).getText();
-            contacts.add(new ContactData(id, lastName, firstName, address, email, mobilePhone, null));
+            contacts.add(new ContactData().withId(id).withLastName(lastName).withFirstName(firstName).withAddress(address).withEmail(email).withMobilePhone(mobilePhone));
         }
         return contacts;
     }
