@@ -6,7 +6,10 @@ public class ContactData {
     private String firstName;
     private String address;
     private String email;
+    private String homePhone;
     private String mobilePhone;
+    private String workPhone;
+    private String allPhones;
     private String group;
 
     public int getId() {
@@ -31,6 +34,18 @@ public class ContactData {
 
     public String getMobilePhone() {
         return mobilePhone;
+    }
+
+    public String getHomePhone() {
+        return homePhone;
+    }
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
     }
 
     public String getGroup() {
@@ -67,6 +82,22 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    public ContactData withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
+
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
     public ContactData withGroup(String group) {
         this.group = group;
         return this;
@@ -80,7 +111,6 @@ public class ContactData {
                 ", firstName='" + firstName + '\'' +
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
-                ", mobilePhone='" + mobilePhone + '\'' +
                 '}';
     }
 
@@ -95,8 +125,7 @@ public class ContactData {
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        return mobilePhone != null ? mobilePhone.equals(that.mobilePhone) : that.mobilePhone == null;
+        return email != null ? email.equals(that.email) : that.email == null;
     }
 
     @Override
@@ -106,7 +135,6 @@ public class ContactData {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (mobilePhone != null ? mobilePhone.hashCode() : 0);
         return result;
     }
 }

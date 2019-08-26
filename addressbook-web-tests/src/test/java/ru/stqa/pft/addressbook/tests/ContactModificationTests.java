@@ -16,7 +16,7 @@ public class ContactModificationTests extends TestBase {
         app.getNavigationHelper().gotoHomePage();
         if (! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(
-                    new ContactData().withLastName("Ivanov").withFirstName("Ivan").withAddress("Rostov-on-Don, Siversa 1").withEmail("ivanov@mail.ru").withMobilePhone("89085555505").withGroup("test1"),
+                    new ContactData().withLastName("Ivanov").withFirstName("Ivan").withGroup("test1"),
                     true);
             app.getNavigationHelper().gotoHomePage();
         }
@@ -27,7 +27,7 @@ public class ContactModificationTests extends TestBase {
         Contacts before = app.getContactHelper().all();
         ContactData modifiedContact = before.iterator().next();
         ContactData contact =
-                new ContactData().withId(modifiedContact.getId()).withLastName("Panfilov").withFirstName(modifiedContact.getFirstName()).withAddress(modifiedContact.getAddress()).withEmail(modifiedContact.getEmail()).withMobilePhone("89081023258");
+                new ContactData().withId(modifiedContact.getId()).withLastName("Panfilov").withFirstName(modifiedContact.getFirstName()).withAddress(modifiedContact.getAddress()).withEmail(modifiedContact.getEmail()).withHomePhone("111").withMobilePhone("89085555505").withWorkPhone("333");
         app.getContactHelper().modifyContact(contact);
         app.getNavigationHelper().gotoHomePage();
         assertEquals(app.getContactHelper().count(), before.size());
