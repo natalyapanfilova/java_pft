@@ -23,8 +23,8 @@ public class GroupDeletionTests extends TestBase {
         Groups before = app.getGroupHelper().all();
         GroupData deletedGroup = before.iterator().next();
         app.getGroupHelper().deleteGroup(deletedGroup);
+        assertThat(app.getGroupHelper().count(), equalTo(before.size() - 1));
         Groups after = app.getGroupHelper().all();
-        assertThat(after.size(), equalTo(before.size() - 1));
         assertThat(after, equalTo(before.without(deletedGroup)));
     }
 

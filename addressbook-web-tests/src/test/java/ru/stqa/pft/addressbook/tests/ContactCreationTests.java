@@ -30,8 +30,8 @@ public class ContactCreationTests extends TestBase {
                 new ContactData().withLastName("Ivanov").withFirstName("Ivan").withAddress("Rostov-on-Don, Siversa 1").withEmail("ivanov@mail.ru").withMobilePhone("89085555505").withGroup(groupName);
         app.getContactHelper().createContact(contact, true);
         app.getNavigationHelper().gotoHomePage();
+        assertThat(app.getContactHelper().count(), equalTo(before.size() + 1));
         Contacts after = app.getContactHelper().all();
-        assertThat(after.size(), equalTo(before.size() + 1));
         assertThat(after, equalTo(before.withEdded(contact.withId(after.stream().mapToInt(ContactData::getId).max().getAsInt()))));
     }
 }
