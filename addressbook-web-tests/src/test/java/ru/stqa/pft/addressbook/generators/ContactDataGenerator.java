@@ -4,7 +4,6 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import ru.stqa.pft.addressbook.model.ContactData;
-import sun.security.util.PendingException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -35,16 +34,16 @@ public class ContactDataGenerator {
 
     private void run() throws IOException {
         List<ContactData> contacts = generateContacts(count);
-        save(contacts, new File(file));
+        saveAsCsv(contacts, new File(file));
     }
 
-    private static void save(List<ContactData> contacts, File file) throws IOException {
-        Writer writer = new FileWriter(file);
-        for (ContactData contact : contacts) {
-            writer.write(String.format("%s;%s;%s;%s;%s;%s;%s\n", contact.getLastName(), contact.getFirstName(), contact.getAddress(),
-                    contact.getEmail(), contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone()));
+    private static void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
+        try (Writer writer = new FileWriter(file)) {
+            for (ContactData contact : contacts) {
+                writer.write(String.format("%s;%s;%s;%s;%s;%s;%s\n", contact.getLastName(), contact.getFirstName(), contact.getAddress(),
+                        contact.getEmail(), contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone()));
+            }
         }
-        writer.close();
     }
 
     private static List<ContactData> generateContacts(int count) {
