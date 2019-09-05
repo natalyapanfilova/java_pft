@@ -16,18 +16,18 @@ public class ContactCreationTests extends TestBase {
 
     @BeforeMethod
     private void ensurePreconditions() {
-        app.getNavigationHelper().gotoGroupPage();
-        if (! app.getGroupHelper().isThereAGroup()) {
+        if (app.db().groups().size() == 0) {
+            app.getNavigationHelper().gotoGroupPage();
             app.getGroupHelper().createGroup(new GroupData().withName(groupName).withHeader("test2").withFooter("test3"));
         } else {
-            groupName = app.getGroupHelper().getGroupName();
+            groupName = app.db().groups().iterator().next().getName();
         }
         app.getNavigationHelper().gotoHomePage();
     }
 
     @Test
     public void testContactCreation() {
-        Contacts before = app.getContactHelper().all();
+        Contacts before = app.db().contacts();
         File photo = new File("src/test/resources/stru.jpg");
         ContactData contact = new ContactData().withLastName("Ivanov").withFirstName("Ivan").withAddress("Rostov-on-Don, Siversa 1")
                 .withEmail("ivanov@mail.ru").withHomePhone("111").withMobilePhone("89085555505").withGroup(groupName)
@@ -35,7 +35,7 @@ public class ContactCreationTests extends TestBase {
         app.getContactHelper().createContact(contact, true);
         app.getNavigationHelper().gotoHomePage();
         assertThat(app.getContactHelper().count(), equalTo(before.size() + 1));
-        Contacts after = app.getContactHelper().all();
+        Contacts after = app.db().contacts();
         assertThat(after, equalTo(before.withEdded(contact.withId(after.stream().mapToInt(ContactData::getId).max().getAsInt()))));
     }
 }

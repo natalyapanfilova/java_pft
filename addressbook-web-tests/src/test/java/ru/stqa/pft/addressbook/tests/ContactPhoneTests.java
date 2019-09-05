@@ -14,13 +14,12 @@ public class ContactPhoneTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.getNavigationHelper().gotoHomePage();
-        if (! app.getContactHelper().isThereAContact()) {
+        if (app.db().contacts().size() == 0) {
             app.getContactHelper().createContact(
                     new ContactData().withLastName("Ivanov").withFirstName("Ivan").withHomePhone("111").withMobilePhone("89085555505").withWorkPhone("333").withGroup("test1"),
                     true);
-            app.getNavigationHelper().gotoHomePage();
         }
+        app.getNavigationHelper().gotoHomePage();
     }
 
 
